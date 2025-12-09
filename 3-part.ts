@@ -23,28 +23,6 @@ interface User {
 
 type UserRole = "user" | "admin" | "guest";
 
-interface IContact {
-  phoneNumber?: string;
-  address?: string;
-}
-
-interface IMeta {
-  createdAt: string;
-  lastLogin: string;
-  isActive: boolean;
-}
-
-interface IIdentity {
-  id: number;
-  username: string;
-  email: string;
-  fullName: string;
-}
-
-interface IUser extends IContact, IMeta, IIdentity {
-  role: UserRole;
-}
-
 // ==============================
 // 2. Customer interfeysi
 // Mijozlar uchun maxsus ma'lumotlar, User'ga o'xshash
@@ -58,28 +36,6 @@ interface Customer {
   isActive?: boolean;
   phoneNumber: string;
   address: string;
-  purchaseHistory: number[];
-  loyaltyPoints: number;
-}
-
-interface ICustomerIdentity {
-  id: number;
-  username: string;
-  email: string;
-  fullName: string;
-}
-
-interface ICustomerMeta {
-  createdAt: string;
-  isActive: boolean;
-}
-
-interface ICustomerContact {
-  phoneNumber: string;
-  address: string;
-}
-
-interface ICustomerIndicator {
   purchaseHistory: number[];
   loyaltyPoints: number;
 }
