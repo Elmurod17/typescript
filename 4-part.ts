@@ -8,10 +8,41 @@
 // 1. BasicUser type
 // Foydalanuvchi uchun asosiy ma'lumotlar
 // ==============================
-type BasicUser = {
+
+type BaseUSer = {
   id: number;
-  username: string;
-  email: string;
+  username?: string;
+  email?: string;
+  title?: string;
+  duration?: number;
+  userId?: number;
+  name?: string;
+  price?: number;
+  date?: string;
+  rating?: number;
+};
+
+type Status =
+  | "pending"
+  | "shipped"
+  | "delivered"
+  | "success"
+  | "failed"
+  | "open"
+  | "closed"
+  | "open"
+  | "closed";
+
+type Format = "video" | "audio" | "image";
+type Level = "beginner" | "intermediate" | "advanced";
+type TargetType = "product" | "course";
+type TType = "purchase" | "refund" | "info" | "warning";
+type Duration = "monthly" | "yearly";
+type Priority = "low" | "high";
+type Method = "standard" | "express";
+type Theme = "light" | "dark";
+
+type BasicUser = BaseUSer & {
   createdAt: string;
   isActive: boolean;
 };
@@ -20,10 +51,7 @@ type BasicUser = {
 // 2. CustomerProfile type
 // Mijozlar uchun profil ma'lumotlari
 // ==============================
-type CustomerProfile = {
-  id: number;
-  username: string;
-  email: string;
+type CustomerProfile = BaseUSer & {
   fullName: string;
   phoneNumber: string;
 };
@@ -32,22 +60,15 @@ type CustomerProfile = {
 // 3. VendorInfo type
 // Sotuvchilar uchun ma'lumotlar
 // ==============================
-type VendorInfo = {
-  id: number;
-  username: string;
-  email: string;
+type VendorInfo = BaseUSer & {
   companyName: string;
-  rating: number;
 };
 
 // ==============================
 // 4. ProductDetails type
 // Mahsulotlar uchun batafsil ma'lumot
 // ==============================
-type ProductDetails = {
-  id: number;
-  name: string;
-  price: number;
+type ProductDetails = BaseUSer & {
   category: string;
   stockQuantity: number;
 };
@@ -56,11 +77,10 @@ type ProductDetails = {
 // 5. OrderInfo type
 // Buyurtma ma'lumotlari
 // ==============================
-type OrderInfo = {
-  id: number;
+type OrderInfo = BaseUSer & {
   customerId: number;
   totalPrice: number;
-  status: "pending" | "shipped" | "delivered";
+  status: Status;
   orderDate: string;
 };
 
@@ -68,11 +88,8 @@ type OrderInfo = {
 // 6. MediaItem type
 // Media kontenti uchun ma'lumotlar
 // ==============================
-type MediaItem = {
-  id: number;
-  title: string;
-  duration: number;
-  format: "video" | "audio" | "image";
+type MediaItem = BaseUSer & {
+  format: Format;
   creator: string;
 };
 
@@ -80,10 +97,7 @@ type MediaItem = {
 // 7. VideoContent type
 // Video ma'lumotlari
 // ==============================
-type VideoContent = {
-  id: number;
-  title: string;
-  duration: number;
+type VideoContent = BaseUSer & {
   views: number;
   resolution: string;
 };
@@ -92,10 +106,7 @@ type VideoContent = {
 // 8. EventDetails type
 // Tadbir ma'lumotlari
 // ==============================
-type EventDetails = {
-  id: number;
-  title: string;
-  date: string;
+type EventDetails = BaseUSer & {
   location: string;
   organizerId: number;
 };
@@ -104,44 +115,36 @@ type EventDetails = {
 // 9. CourseInfo type
 // Kurslar uchun ma'lumotlar
 // ==============================
-type CourseInfo = {
-  id: number;
-  title: string;
+type CourseInfo = BaseUSer & {
   instructor: string;
   durationHours: number;
-  level: "beginner" | "intermediate" | "advanced";
+  level: Level;
 };
 
 // ==============================
 // 10. ReviewItem type
 // Sharhlar uchun ma'lumotlar
 // ==============================
-type ReviewItem = {
-  id: number;
-  userId: number;
-  rating: number;
+type ReviewItem = BaseUSer & {
   comment: string;
-  targetType: "product" | "course";
+  targetType: TargetType;
 };
 
 // ==============================
 // 11. TransactionRecord type
 // Tranzaksiya yozuvlari
 // ==============================
-type TransactionRecord = {
-  id: number;
+type TransactionRecord = BaseUSer & {
   amount: number;
-  date: string;
-  type: "purchase" | "refund";
-  status: "success" | "failed";
+  type: TType;
+  status: Status;
 };
 
 // ==============================
 // 12. InventoryEntry type
 // Ombor yozuvlari
 // ==============================
-type InventoryEntry = {
-  id: number;
+type InventoryEntry = BaseUSer & {
   productId: number;
   quantity: number;
   warehouse: string;
@@ -152,9 +155,7 @@ type InventoryEntry = {
 // 13. CampaignData type
 // Marketing kampaniyasi ma'lumotlari
 // ==============================
-type CampaignData = {
-  id: number;
-  title: string;
+type CampaignData = BaseUSer & {
   budget: number;
   startDate: string;
   targetAudience: string;
@@ -164,11 +165,8 @@ type CampaignData = {
 // 14. SubscriptionInfo type
 // Obuna rejalari ma'lumotlari
 // ==============================
-type SubscriptionInfo = {
-  id: number;
-  name: string;
-  price: number;
-  duration: "monthly" | "yearly";
+type SubscriptionInfo = BaseUSer & {
+  duration: Duration;
   features: string[];
 };
 
@@ -176,11 +174,9 @@ type SubscriptionInfo = {
 // 15. NotificationData type
 // Bildirishnoma ma'lumotlari
 // ==============================
-type NotificationData = {
-  id: number;
-  userId: number;
+type NotificationData = BaseUSer & {
   message: string;
-  type: "info" | "warning";
+  type: TType;
   read: boolean;
 };
 
@@ -188,23 +184,19 @@ type NotificationData = {
 // 16. SupportTicket type
 // Texnik yordam chiptasi
 // ==============================
-type SupportTicket = {
-  id: number;
-  userId: number;
+type SupportTicket = BaseUSer & {
   subject: string;
-  status: "open" | "closed";
-  priority: "low" | "high";
+  status: Status;
+  priority: Priority;
 };
 
 // ==============================
 // 17. BlogArticle type
 // Blog maqolasi ma'lumotlari
 // ==============================
-type BlogArticle = {
-  id: number;
-  title: string;
+type BlogArticle = BaseUSer & {
   author: string;
-  status: "draft" | "published";
+  status: Status;
   tags: string[];
 };
 
@@ -212,9 +204,7 @@ type BlogArticle = {
 // 18. PaymentDetails type
 // To'lov usullari ma'lumotlari
 // ==============================
-type PaymentDetails = {
-  id: number;
-  userId: number;
+type PaymentDetails = BaseUSer & {
   type: string;
   cardNumber: string;
   isDefault: boolean;
@@ -224,11 +214,10 @@ type PaymentDetails = {
 // 19. ShippingDetails type
 // Yetkazib berish ma'lumotlari
 // ==============================
-type ShippingDetails = {
-  id: number;
+type ShippingDetails = BaseUSer & {
   orderId: number;
   address: string;
-  method: "standard" | "express";
+  method: Method;
   cost: number;
 };
 
@@ -236,10 +225,8 @@ type ShippingDetails = {
 // 20. UserSettings type
 // Foydalanuvchi sozlamalari
 // ==============================
-type UserSettings = {
-  id: number;
-  username: string;
+type UserSettings = BaseUSer & {
   privacy: string;
-  theme: "light" | "dark";
+  theme: Theme;
   notifications: boolean;
 };
