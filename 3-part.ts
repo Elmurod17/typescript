@@ -62,6 +62,28 @@ interface Customer {
   loyaltyPoints: number;
 }
 
+interface ICustomerIdentity {
+  id: number;
+  username: string;
+  email: string;
+  fullName: string;
+}
+
+interface ICustomerMeta {
+  createdAt: string;
+  isActive: boolean;
+}
+
+interface ICustomerContact {
+  phoneNumber: string;
+  address: string;
+}
+
+interface ICustomerIndicator {
+  purchaseHistory: number[];
+  loyaltyPoints: number;
+}
+
 // ==============================
 // 3. Vendor interfeysi
 // Sotuvchilar uchun ma'lumotlar, User va Customer'ga o'xshash
