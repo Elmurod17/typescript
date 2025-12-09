@@ -21,7 +21,29 @@ interface User {
   role: "user" | "admin" | "guest";
 }
 
- 
+type UserRole = "user" | "admin" | "guest";
+
+interface IContact {
+  phoneNumber?: string;
+  address?: string;
+}
+
+interface IMeta {
+  createdAt: string;
+  lastLogin: string;
+  isActive: boolean;
+}
+
+interface IIdentity {
+  id: number;
+  username: string;
+  email: string;
+  fullName: string;
+}
+
+interface IUser extends IContact, IMeta, IIdentity {
+  role: UserRole;
+}
 
 // ==============================
 // 2. Customer interfeysi
